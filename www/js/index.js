@@ -1,4 +1,12 @@
-$('#camera-control').click(function capturePhoto() {
+var picsTaken = 0;
+
+function savePhoto(data) {
+    $('#cameraPic').attr('src', "data:image/jpeg;base64," + data);
+}
+
+$('#camera-control').click(function () {
+	++picsTaken;
+   	$('#pics-taken').html(picsTaken + " pictures have been taken.");
     if (navigator.camera) {
     	navigator.camera.getPicture(savePhoto, null, {sourceType:1,quality:60});
     }
@@ -6,7 +14,3 @@ $('#camera-control').click(function capturePhoto() {
     	$('#error-output').html('CameraAPI not supported');
     }
 });
-
-function savePhoto(data) {
-    $('#cameraPic').attr('src', "data:image/jpeg;base64," + data);
-}
