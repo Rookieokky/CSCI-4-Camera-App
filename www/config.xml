@@ -6,11 +6,10 @@
         id        = "com.phonegap.hello-world"
         version   = "1.0.0">
 
-    <name>RootBeer</name>
+    <name>Camera Demo</name>
 
     <description>
-        Select a rootbeer by type, flavor, etc. and vote for 
-        your favorite!
+        Take a picture of something interesting!
     </description>
 
     <author href="http://phonegap.com" email="support@phonegap.com">
