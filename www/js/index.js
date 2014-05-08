@@ -13,11 +13,9 @@ function getPhotoError () {
 }
 
 function getPosition (position) {
-    if (navigator.geolocation) {
-        var longitude = position.coords.latitude;
-        var latitude = position.coords.longitude;
-        $('#gis-location').html("GIS coordinates: " + longitude + ", " + latitude);
-    }
+    var longitude = position.coords.latitude;
+    var latitude = position.coords.longitude;
+    $('#gis-location').html("GIS coordinates: " + longitude + ", " + latitude);
 }
 
 function getPositionError (error) {
