@@ -8,18 +8,20 @@ function getPhoto(data) {
     $('#camera-photo').attr('src', "data:image/jpeg;base64," + data);
 }
 
+function getPhotoError () {
+    $('#error-output').append('<li>error capturing photo</li>');
+}
+
 function getPosition (position) {
     if (navigator.geolocation) {
         var longitude = position.coords.latitude;
         var latitude = position.coords.longitude;
         $('#gis-location').html("GIS coordinates: " + longitude + ", " + latitude);
-    } else {
-        $('#gis-location').html("GIS coordinates: not available");
     }
 }
 
-function photoError () {
-	$('#error-output').html('Error capturing photo');
+function getPositionError (error) {
+    $('#error-output').append('<li>' + error.message + '</li>');
 }
 
 $('button.camera-control').click(function () {
@@ -32,11 +34,8 @@ $('button.camera-control').click(function () {
     		sourceType: 1,
     		encodingType: 0
     	};
-    	navigator.camera.getPicture(getPhoto, photoError, options);
-        navigator.geolocation.getCurrentPosition(getPosition, null);
-    }
-    else {
-    	$('#error-output').html('CameraAPI not supported');
+    	navigator.camera.getPicture(getPhoto, getPhotoError, options);
+        navigator.geolocation.getCurrentPosition(getPosition, getPositionError);
     }
 });
 
