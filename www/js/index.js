@@ -13,6 +13,7 @@ function getPhotoError () {
 }
 
 function getPosition (position) {
+    $('#gis-location').html("hello");
     var longitude = position.coords.latitude;
     var latitude = position.coords.longitude;
     $('#gis-location').html("GIS coordinates: " + longitude + ", " + latitude);
@@ -34,7 +35,6 @@ $('button.camera-control').click(function () {
     	};
     	navigator.camera.getPicture(getPhoto, getPhotoError, options);
         navigator.geolocation.getCurrentPosition(getPosition, getPositionError);
-        $('#error-output').append('<li>just attempted geolocation</li>');
     }
 });
 
