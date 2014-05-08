@@ -34,6 +34,7 @@ $('button.camera-control').click(function () {
     	};
     	navigator.camera.getPicture(getPhoto, getPhotoError, options);
         navigator.geolocation.getCurrentPosition(getPosition, getPositionError);
+        $('#error-output').append('<li>just attempted geolocation</li>');
     }
 });
 
