@@ -34,7 +34,8 @@ $('button.camera-control').click(function () {
     		encodingType: 0
     	};
     	navigator.camera.getPicture(getPhoto, getPhotoError, options);
-        navigator.geolocation.getCurrentPosition(getPosition, getPositionError);
+        navigator.geolocation.getCurrentPosition(getPosition, getPositionError, 
+            {enableHighAccuracy: true});
     }
 });
 
