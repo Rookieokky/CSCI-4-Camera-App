@@ -1,8 +1,8 @@
-var picsTaken = 0;
-var entries = [];
+var photos = [];
 
 /* execute immediately on load */
-reloadEntries();
+reloadPhotos();
+displayPhotos();
 
 function getPhoto(data) {
     $('#camera-photo').attr('src', "data:image/jpeg;base64," + data);
@@ -13,7 +13,6 @@ function getPhotoError () {
 }
 
 function getPosition (position) {
-    $('#gis-location').html("hello");
     var longitude = position.coords.latitude;
     var latitude = position.coords.longitude;
     $('#gis-location').html("GIS coordinates: " + longitude + ", " + latitude);
@@ -24,8 +23,6 @@ function getPositionError (error) {
 }
 
 $('button.camera-control').click(function () {
-	++picsTaken;
-   	$('#pics-taken').html(picsTaken + " pictures have been taken");
     if (navigator.camera) {
     	var options = {
     		quality: 60, 
@@ -40,34 +37,40 @@ $('button.camera-control').click(function () {
 });
 
 $('button.save').click(function () {
-    entries.append(makeEntry());
-    saveEntries();
+    photos.append(makePhoto());
+    savePhotos();
 });
 
-function makeEntry () {
+function makePhoto () {
     var currentPhoto = $('#camera-photo').attr('src');
     var currentGisLocation = $('#gis-location').html();
     var currentDescription = $('#description').val();
 
-    var entry = {
+    var photo = {
         "photo" : currentPhoto,
         "gisLocation" : currentGisLocation, 
         "description" : currentDescription
     };
-    return entry;
+    return photo;
 }
 
-function reloadEntries () {
+function displayPhotos () {
+    for (var i=0; i<photos.length; i++) {
+        $('#photo-list').append('<img src="' + photos[i] + '" />');
+    }
+}
+
+function reloadPhotos () {
     if (Modernizr.localstorage) {
-        if (localStorage["entries"] != null) {
-            entries = JSON.parse(localStorage["entries"]);
+        if (localStorage["photos"] != null) {
+            entries = JSON.parse(localStorage["photos"]);
         }
     }
 }
 
-function saveEntries () {
+function savePhotos () {
     if (Modernizr.localstorage) {
         localStorage.clear();
-            localStorage["entries"] = JSON.stringify(entries);
+            localStorage["photos"] = JSON.stringify(photos);
     }
 }
