@@ -8,18 +8,10 @@ function getPhoto(data) {
     $('#camera-photo').attr('src', "data:image/jpeg;base64," + data);
 }
 
-function getPhotoError () {
-    $('#error-output').append('<li>error capturing photo</li>');
-}
-
 function getPosition (position) {
     var longitude = position.coords.latitude;
     var latitude = position.coords.longitude;
     $('#gis-location').html("GIS coordinates: " + longitude + ", " + latitude);
-}
-
-function getPositionError (error) {
-    $('#error-output').append('<li>' + error.message + '</li>');
 }
 
 $('button.camera-control').click(function () {
@@ -56,7 +48,7 @@ function makePhoto () {
 
 function displayPhotos () {
     for (var i=0; i<photos.length; i++) {
-        $('#photo-list').append('<img src="' + photos[i] + '" />');
+        $('#photo-list').append('<img src="' + photos[i]["photo"] + '" />');
     }
 }
 
